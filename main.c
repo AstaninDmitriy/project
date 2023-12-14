@@ -5,6 +5,7 @@ void arr(int **mass, int *size);
 void insert(int **mass, int num, int index, int *size);
 void append(int **mass, int num, int *size);
 void del(int **mass, int *size, int index);
+void pop(int **mass, int *size);
 
 int main() {
     int *mass = NULL;
@@ -23,6 +24,7 @@ int main() {
         printf("2 - Вставка эл. по индексу(insert).\n");
         printf("3 - Вставка эл. в конец массива(append).\n");
         printf("4 - Удаление элемента по индексу(del).\n");
+        printf("5 - Удаление последнего элемента(pop).\n");
         printf("----------------------------------------\n");
         printf("\n");
         printf("Введите номер действия - ");
@@ -75,6 +77,14 @@ int main() {
                 printf("Введите индекс числа который нужно убрать из массива - ");
                 scanf("%d", &index);
                 del(&mass, &size, index);
+            }
+        } else if(command == 5){
+            if(mass == NULL){
+                printf("\n");
+                printf("Массива не существует!\n");
+                printf("\n");
+            } else {
+                pop(&mass, &size);
             }
         }
     }
@@ -155,6 +165,21 @@ void del(int **mass, int *size, int index) {
         (*mass)[i] = (*mass)[i + 1];
     }
 
+    *mass = (int *)realloc(*mass, (*size - 1) * sizeof(int));
+    (*size)--;
+
+    printf("Обновленный массив:\n");
+    for (int i = 0; i < *size; i++) {
+        printf("%d ", (*mass)[i]);
+    }
+    printf("\n");
+}
+
+void pop(int **mass, int *size){
+    
+    int last_num = sizeof(**mass) / sizeof(*mass[0]) - 1;
+    printf("%d", last_num);
+    
     *mass = (int *)realloc(*mass, (*size - 1) * sizeof(int));
     (*size)--;
 
