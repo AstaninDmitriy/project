@@ -6,6 +6,7 @@ void insert(int **mass, int num, int index, int *size);
 void append(int **mass, int num, int *size);
 void del(int **mass, int *size, int index);
 void pop(int **mass, int *size);
+void find(int **mass, int num, int size);
 
 int main() {
     int *mass = NULL;
@@ -25,6 +26,7 @@ int main() {
         printf("3 - Вставка эл. в конец массива(append).\n");
         printf("4 - Удаление элемента по индексу(del).\n");
         printf("5 - Удаление последнего элемента(pop).\n");
+        printf("6 - Поиск элемента(find).\n");
         printf("----------------------------------------\n");
         printf("\n");
         printf("Введите номер действия - ");
@@ -39,6 +41,7 @@ int main() {
             if(mass == NULL){
                 arr(&mass, &size);
             } else {
+                printf("\n");
                 printf("Массив уже создан!\n");
                 printf("\n");
             }
@@ -86,6 +89,12 @@ int main() {
             } else {
                 pop(&mass, &size);
             }
+        } else if(command == 6){
+            printf("\n");
+            printf("Введите число индекс которого нужно найти - ");
+            printf("\n");
+            scanf("%d", &num);
+            find(&mass, num, size);
         }
     }
 
@@ -176,7 +185,7 @@ void del(int **mass, int *size, int index) {
 }
 
 void pop(int **mass, int *size){
-    
+
     int last_num = sizeof(**mass) / sizeof(*mass[0]) - 1;
     printf("%d", last_num);
     
@@ -188,4 +197,13 @@ void pop(int **mass, int *size){
         printf("%d ", (*mass)[i]);
     }
     printf("\n");
+}
+
+void find(int **mass, int num, int size){
+    for(int i = 0; i <= size; i++){
+        if(*mass[i] == num){
+            printf("%d\n", *mass[i]);    //высокая сложность выполнения
+            break;
+        }
+    }
 }
